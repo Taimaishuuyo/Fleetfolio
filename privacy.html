@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy — Fleetfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #3B82F6;
+            --primary-dark: #2563EB;
+            --text: #1E293B;
+            --text-secondary: #64748B;
+            --bg: #FFFFFF;
+            --bg-subtle: #F8FAFC;
+            --border: #E2E8F0;
+            --purple: #8B5CF6;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+            color: var(--text);
+            background: var(--bg);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            z-index: 100;
+            padding: 0 24px;
+        }
+
+        nav .nav-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+        }
+
+        nav .logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        nav .logo span {
+            background: linear-gradient(135deg, var(--primary), var(--purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        nav .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            list-style: none;
+        }
+
+        nav .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        nav .nav-links a:hover { color: var(--text); }
+
+        nav .nav-links .btn-nav {
+            background: var(--primary);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 100px;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        nav .nav-links .btn-nav:hover {
+            background: var(--primary-dark);
+            color: white;
+        }
+
+        .legal {
+            padding: 120px 24px 80px;
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .legal h1 {
+            font-size: 2.25rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: 8px;
+        }
+
+        .legal .last-updated {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+        }
+
+        .legal h2 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-top: 36px;
+            margin-bottom: 12px;
+        }
+
+        .legal p {
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            line-height: 1.7;
+        }
+
+        .legal p a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .legal p a:hover {
+            text-decoration: underline;
+        }
+
+        .legal ul {
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            padding-left: 24px;
+            line-height: 1.8;
+        }
+
+        footer {
+            padding: 48px 24px;
+            border-top: 1px solid var(--border);
+        }
+
+        footer .footer-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        footer .footer-left {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        footer .footer-links {
+            display: flex;
+            gap: 24px;
+            list-style: none;
+        }
+
+        footer .footer-links a {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        footer .footer-links a:hover { color: var(--text); }
+
+        @media (max-width: 768px) {
+            nav .nav-links { gap: 20px; }
+            footer .footer-inner {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-inner">
+            <a href="index.html" class="logo"><span>Fleetfolio</span></a>
+            <ul class="nav-links">
+                <li><a href="privacy.html">Privacy</a></li>
+                <li><a href="terms.html">Terms</a></li>
+                <li><a href="#" class="btn-nav">Download</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="legal">
+        <h1>Privacy Policy</h1>
+        <p class="last-updated">Last updated: April 13, 2025</p>
+
+        <h2>Overview</h2>
+        <p>Fleetfolio ("we", "our", or "the app") is committed to protecting your privacy. This Privacy Policy explains how your information is handled when you use the Fleetfolio mobile application.</p>
+
+        <h2>Data Collection</h2>
+        <p>Fleetfolio is designed with privacy in mind. All data you enter — including vehicle details, maintenance records, fuel logs, modification records, photos, and reminders — is stored locally on your device using Apple's SwiftData framework.</p>
+        <p>We do not collect, transmit, or store any of your personal data on external servers. Your data never leaves your device unless you explicitly choose to share or export it.</p>
+
+        <h2>Information We Do Not Collect</h2>
+        <ul>
+            <li>Personal identification information (name, email, phone number)</li>
+            <li>Location data</li>
+            <li>Usage analytics or tracking data</li>
+            <li>Advertising identifiers</li>
+            <li>Vehicle information (stored only on your device)</li>
+        </ul>
+
+        <h2>Photos</h2>
+        <p>Fleetfolio allows you to attach photos to your records. These photos are stored locally on your device within the app's data. We do not upload, access, or process your photos on any external server.</p>
+
+        <h2>Third-Party Services</h2>
+        <p>Fleetfolio does not integrate with any third-party analytics, advertising, or tracking services. No data is shared with third parties.</p>
+
+        <h2>Data Security</h2>
+        <p>Since all data is stored locally on your device, it is protected by your device's built-in security features, including passcode, Face ID, or Touch ID. We recommend keeping your device software up to date to ensure the best protection.</p>
+
+        <h2>Data Deletion</h2>
+        <p>You can delete any individual record within the app at any time. Uninstalling the app will remove all associated data from your device.</p>
+
+        <h2>Children's Privacy</h2>
+        <p>Fleetfolio is not directed at children under the age of 13. We do not knowingly collect any information from children.</p>
+
+        <h2>Changes to This Policy</h2>
+        <p>We may update this Privacy Policy from time to time. Any changes will be reflected on this page with an updated revision date.</p>
+
+        <h2>Contact Us</h2>
+        <p>If you have any questions about this Privacy Policy, please contact us at <a href="mailto:contact@example.com">contact@example.com</a>.</p>
+    </div>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-left">&copy; 2025 Fleetfolio. All rights reserved.</div>
+            <ul class="footer-links">
+                <li><a href="privacy.html">Privacy Policy</a></li>
+                <li><a href="terms.html">Terms of Service</a></li>
+                <li><a href="mailto:contact@example.com">Contact</a></li>
+            </ul>
+        </div>
+    </footer>
+</body>
+</html>

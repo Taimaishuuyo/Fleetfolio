@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fleetfolio — Your Personal Car Fleet Manager</title>
+    <meta name="description" content="Track modifications, maintenance, fuel-ups and more for every car you own. Built for enthusiasts who care about their fleet.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #3B82F6;
+            --primary-dark: #2563EB;
+            --text: #1E293B;
+            --text-secondary: #64748B;
+            --bg: #FFFFFF;
+            --bg-subtle: #F8FAFC;
+            --border: #E2E8F0;
+            --purple: #8B5CF6;
+            --orange: #F59E0B;
+            --yellow: #EAB308;
+            --green: #22C55E;
+            --radius: 16px;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+            color: var(--text);
+            background: var(--bg);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            z-index: 100;
+            padding: 0 24px;
+        }
+
+        nav .nav-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+        }
+
+        nav .logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        nav .logo span {
+            background: linear-gradient(135deg, var(--primary), var(--purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        nav .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            list-style: none;
+        }
+
+        nav .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        nav .nav-links a:hover { color: var(--text); }
+
+        nav .nav-links .btn-nav {
+            background: var(--primary);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 100px;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        nav .nav-links .btn-nav:hover {
+            background: var(--primary-dark);
+            color: white;
+        }
+
+        .hero {
+            padding: 160px 24px 60px;
+            text-align: center;
+            background: linear-gradient(180deg, var(--bg-subtle) 0%, var(--bg) 100%);
+        }
+
+        .hero-inner {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
+            color: var(--primary);
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 6px 16px;
+            border-radius: 100px;
+            margin-bottom: 24px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 .gradient {
+            background: linear-gradient(135deg, var(--primary), var(--purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 520px;
+            margin: 0 auto 40px;
+            line-height: 1.7;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--text);
+            color: white;
+            padding: 14px 28px;
+            border-radius: 14px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-primary svg {
+            width: 22px;
+            height: 22px;
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: transparent;
+            color: var(--text);
+            padding: 14px 28px;
+            border: 1.5px solid var(--border);
+            border-radius: 14px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: border-color 0.2s, background 0.2s;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--text-secondary);
+            background: var(--bg-subtle);
+        }
+
+        /* Carousel */
+        .carousel-section {
+            padding: 60px 24px 100px;
+            overflow: hidden;
+        }
+
+        .carousel-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .carousel-viewport {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            height: 580px;
+        }
+
+        .carousel-track {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .carousel-slide {
+            position: absolute;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .phone-frame {
+            width: 260px;
+            background: #000;
+            border-radius: 40px;
+            padding: 12px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+            transition: box-shadow 0.5s;
+        }
+
+        .carousel-slide.active .phone-frame {
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.25);
+        }
+
+        .phone-screen {
+            border-radius: 30px;
+            overflow: hidden;
+            background: #1C1C1E;
+            aspect-ratio: 9 / 19.5;
+        }
+
+        .phone-screen img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .phone-screen .placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+            font-size: 0.85rem;
+            gap: 8px;
+        }
+
+        .phone-screen .placeholder .placeholder-icon {
+            font-size: 2rem;
+            opacity: 0.5;
+        }
+
+        .carousel-label {
+            text-align: center;
+            margin-top: 16px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text);
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .carousel-slide.active .carousel-label {
+            opacity: 1;
+        }
+
+        /* Carousel dots */
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 40px;
+        }
+
+        .carousel-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--border);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            padding: 0;
+        }
+
+        .carousel-dot.active {
+            background: var(--primary);
+            transform: scale(1.2);
+        }
+
+        /* Carousel arrows */
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: white;
+            border: 1px solid var(--border);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--text);
+            z-index: 10;
+            transition: all 0.2s;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .carousel-arrow:hover {
+            background: var(--bg-subtle);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        .carousel-arrow.prev { left: 0; }
+        .carousel-arrow.next { right: 0; }
+
+        .features {
+            padding: 100px 24px;
+        }
+
+        .features-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            text-align: center;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.25rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: 16px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 540px;
+            margin: 0 auto 60px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .feature-card {
+            background: var(--bg-subtle);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 32px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06);
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+        }
+
+        .feature-icon.purple { background: rgba(139, 92, 246, 0.12); }
+        .feature-icon.orange { background: rgba(245, 158, 11, 0.12); }
+        .feature-icon.yellow { background: rgba(234, 179, 8, 0.12); }
+        .feature-icon.blue { background: rgba(59, 130, 246, 0.12); }
+        .feature-icon.green { background: rgba(34, 197, 94, 0.12); }
+        .feature-icon.red { background: rgba(239, 68, 68, 0.12); }
+
+        .feature-card h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .feature-card p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .cta {
+            padding: 100px 24px;
+            background: var(--bg-subtle);
+        }
+
+        .cta-inner {
+            max-width: 640px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: 2.25rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: 16px;
+        }
+
+        .cta p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 36px;
+        }
+
+        footer {
+            padding: 48px 24px;
+            border-top: 1px solid var(--border);
+        }
+
+        footer .footer-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        footer .footer-left {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        footer .footer-links {
+            display: flex;
+            gap: 24px;
+            list-style: none;
+        }
+
+        footer .footer-links a {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        footer .footer-links a:hover { color: var(--text); }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.25rem; }
+            .hero p { font-size: 1.05rem; }
+            .features-grid { grid-template-columns: 1fr; }
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            nav .nav-links { gap: 20px; }
+            footer .footer-inner {
+                flex-direction: column;
+                text-align: center;
+            }
+            .carousel-viewport { height: 480px; }
+            .phone-frame { width: 200px; }
+            .carousel-arrow { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-inner">
+            <a href="index.html" class="logo"><span>Fleetfolio</span></a>
+            <ul class="nav-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="privacy.html">Privacy</a></li>
+                <li><a href="terms.html">Terms</a></li>
+                <li><a href="#download" class="btn-nav">Download</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-inner">
+            <div class="hero-badge">Now available on the App Store</div>
+            <h1>Your entire fleet,<br><span class="gradient">one app.</span></h1>
+            <p>Track modifications, maintenance, fuel-ups, and spending across every car you own. Built for enthusiasts who care about their fleet.</p>
+            <div class="hero-buttons">
+                <a href="#" class="btn-primary" id="download">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                    Download on the App Store
+                </a>
+                <a href="#features" class="btn-secondary">Learn more</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="carousel-section">
+        <div class="carousel-inner">
+            <div class="carousel-viewport">
+                <button class="carousel-arrow prev" onclick="moveSlide(-1)">&#8249;</button>
+
+                <div class="carousel-track">
+                    <!-- Slide 1: Garage -->
+                    <div class="carousel-slide" data-index="0">
+                        <div class="phone-frame">
+                            <div class="phone-screen">
+                                <img src="screenshots/garage.PNG" alt="Garage View">
+                            </div>
+                        </div>
+                        <div class="carousel-label">Garage</div>
+                    </div>
+
+                    <!-- Slide 2: Vehicle Detail -->
+                    <div class="carousel-slide" data-index="1">
+                        <div class="phone-frame">
+                            <div class="phone-screen">
+                                <img src="screenshots/vehicle-detail.PNG" alt="Vehicle Detail">
+                            </div>
+                        </div>
+                        <div class="carousel-label">Vehicle Detail</div>
+                    </div>
+
+                    <!-- Slide 3: Reports -->
+                    <div class="carousel-slide" data-index="2">
+                        <div class="phone-frame">
+                            <div class="phone-screen">
+                                <img src="screenshots/reports.PNG" alt="Reports">
+                            </div>
+                        </div>
+                        <div class="carousel-label">Reports</div>
+                    </div>
+
+                    <!-- Slide 4: Reminders -->
+                    <div class="carousel-slide" data-index="3">
+                        <div class="phone-frame">
+                            <div class="phone-screen">
+                                <img src="screenshots/reminders.PNG" alt="Reminders">
+                            </div>
+                        </div>
+                        <div class="carousel-label">Reminders</div>
+                    </div>
+                </div>
+
+                <button class="carousel-arrow next" onclick="moveSlide(1)">&#8250;</button>
+            </div>
+
+            <div class="carousel-dots">
+                <button class="carousel-dot active" onclick="goToSlide(0)"></button>
+                <button class="carousel-dot" onclick="goToSlide(1)"></button>
+                <button class="carousel-dot" onclick="goToSlide(2)"></button>
+                <button class="carousel-dot" onclick="goToSlide(3)"></button>
+            </div>
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <div class="features-inner">
+            <div class="section-label">Features</div>
+            <h2 class="section-title">Everything your fleet needs</h2>
+            <p class="section-subtitle">From bolt-ons to oil changes, Fleetfolio keeps every detail organized and at your fingertips.</p>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon purple">&#9881;</div>
+                    <h3>Modifications</h3>
+                    <p>Log every mod with cost, shop, mileage, photos, and notes. See your total investment at a glance.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon orange">&#128295;</div>
+                    <h3>Maintenance</h3>
+                    <p>Track oil changes, brake jobs, and every service in between. Filter by service type and date range.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon yellow">&#9981;</div>
+                    <h3>Fuel Tracking</h3>
+                    <p>Record fill-ups with gallons, price per gallon, and mileage. See your total fuel spending over time.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon blue">&#128202;</div>
+                    <h3>Reports &amp; Charts</h3>
+                    <p>Visualize spending trends with interactive charts. Filter by vehicle, date range, and record type.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon red">&#128276;</div>
+                    <h3>Reminders</h3>
+                    <p>Set reminders for upcoming services so you never miss an oil change or inspection again.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon green">&#128247;</div>
+                    <h3>Photo Attachments</h3>
+                    <p>Attach multiple photos to any record. Document receipts, work done, or your latest build progress.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <div class="cta-inner">
+            <h2>Start tracking your fleet today</h2>
+            <p>Download Fleetfolio for free and take control of every dollar, mile, and mod across your cars.</p>
+            <a href="#" class="btn-primary">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                Download on the App Store
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-left">&copy; 2025 Fleetfolio. All rights reserved.</div>
+            <ul class="footer-links">
+                <li><a href="privacy.html">Privacy Policy</a></li>
+                <li><a href="terms.html">Terms of Service</a></li>
+                <li><a href="mailto:contact@example.com">Contact</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script>
+        const slides = document.querySelectorAll('.carousel-slide');
+        const dots = document.querySelectorAll('.carousel-dot');
+        const totalSlides = slides.length;
+        let currentIndex = 0;
+        let autoPlayTimer;
+
+        function updateCarousel() {
+            slides.forEach((slide, i) => {
+                slide.classList.remove('active');
+                const offset = i - currentIndex;
+
+                if (offset === 0) {
+                    // Active center slide
+                    slide.style.transform = 'translateX(0) scale(1)';
+                    slide.style.opacity = '1';
+                    slide.style.zIndex = '5';
+                    slide.classList.add('active');
+                } else if (Math.abs(offset) === 1) {
+                    // Adjacent slides
+                    slide.style.transform = `translateX(${offset * 280}px) scale(0.8)`;
+                    slide.style.opacity = '0.5';
+                    slide.style.zIndex = '3';
+                } else if (Math.abs(offset) === 2) {
+                    // Far slides
+                    slide.style.transform = `translateX(${offset * 260}px) scale(0.65)`;
+                    slide.style.opacity = '0.2';
+                    slide.style.zIndex = '1';
+                } else {
+                    // Hidden
+                    slide.style.transform = `translateX(${offset > 0 ? 600 : -600}px) scale(0.5)`;
+                    slide.style.opacity = '0';
+                    slide.style.zIndex = '0';
+                }
+            });
+
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentIndex);
+            });
+        }
+
+        function goToSlide(index) {
+            currentIndex = index;
+            updateCarousel();
+            resetAutoPlay();
+        }
+
+        function moveSlide(direction) {
+            currentIndex = (currentIndex + direction + totalSlides) % totalSlides;
+            updateCarousel();
+            resetAutoPlay();
+        }
+
+        function resetAutoPlay() {
+            clearInterval(autoPlayTimer);
+            autoPlayTimer = setInterval(() => moveSlide(1), 4000);
+        }
+
+        // Click on slide to navigate
+        slides.forEach(slide => {
+            slide.addEventListener('click', () => {
+                const index = parseInt(slide.dataset.index);
+                if (index !== currentIndex) {
+                    goToSlide(index);
+                }
+            });
+        });
+
+        // Touch/swipe support
+        let touchStartX = 0;
+        let touchEndX = 0;
+        const viewport = document.querySelector('.carousel-viewport');
+
+        viewport.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        viewport.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            const diff = touchStartX - touchEndX;
+            if (Math.abs(diff) > 50) {
+                moveSlide(diff > 0 ? 1 : -1);
+            }
+        }, { passive: true });
+
+        // Keyboard support
+        document.addEventListener('keydown', e => {
+            if (e.key === 'ArrowLeft') moveSlide(-1);
+            if (e.key === 'ArrowRight') moveSlide(1);
+        });
+
+        // Initialize
+        updateCarousel();
+        autoPlayTimer = setInterval(() => moveSlide(1), 4000);
+    </script>
+</body>
+</html>

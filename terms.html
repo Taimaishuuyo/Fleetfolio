@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service — Fleetfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #3B82F6;
+            --primary-dark: #2563EB;
+            --text: #1E293B;
+            --text-secondary: #64748B;
+            --bg: #FFFFFF;
+            --bg-subtle: #F8FAFC;
+            --border: #E2E8F0;
+            --purple: #8B5CF6;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+            color: var(--text);
+            background: var(--bg);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            z-index: 100;
+            padding: 0 24px;
+        }
+
+        nav .nav-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+        }
+
+        nav .logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        nav .logo span {
+            background: linear-gradient(135deg, var(--primary), var(--purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        nav .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            list-style: none;
+        }
+
+        nav .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        nav .nav-links a:hover { color: var(--text); }
+
+        nav .nav-links .btn-nav {
+            background: var(--primary);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 100px;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        nav .nav-links .btn-nav:hover {
+            background: var(--primary-dark);
+            color: white;
+        }
+
+        .legal {
+            padding: 120px 24px 80px;
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .legal h1 {
+            font-size: 2.25rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: 8px;
+        }
+
+        .legal .last-updated {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+        }
+
+        .legal h2 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-top: 36px;
+            margin-bottom: 12px;
+        }
+
+        .legal p {
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            line-height: 1.7;
+        }
+
+        .legal p a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .legal p a:hover {
+            text-decoration: underline;
+        }
+
+        .legal ul {
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            padding-left: 24px;
+            line-height: 1.8;
+        }
+
+        footer {
+            padding: 48px 24px;
+            border-top: 1px solid var(--border);
+        }
+
+        footer .footer-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        footer .footer-left {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        footer .footer-links {
+            display: flex;
+            gap: 24px;
+            list-style: none;
+        }
+
+        footer .footer-links a {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        footer .footer-links a:hover { color: var(--text); }
+
+        @media (max-width: 768px) {
+            nav .nav-links { gap: 20px; }
+            footer .footer-inner {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-inner">
+            <a href="index.html" class="logo"><span>Fleetfolio</span></a>
+            <ul class="nav-links">
+                <li><a href="privacy.html">Privacy</a></li>
+                <li><a href="terms.html">Terms</a></li>
+                <li><a href="#" class="btn-nav">Download</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="legal">
+        <h1>Terms of Service</h1>
+        <p class="last-updated">Last updated: April 13, 2025</p>
+
+        <h2>Agreement to Terms</h2>
+        <p>By downloading, installing, or using Fleetfolio ("the app"), you agree to be bound by these Terms of Service. If you do not agree to these terms, do not use the app.</p>
+
+        <h2>Description of Service</h2>
+        <p>Fleetfolio is a personal vehicle fleet management application that allows users to track vehicle modifications, maintenance records, fuel logs, spending, and reminders. All data is stored locally on your device.</p>
+
+        <h2>Use of the App</h2>
+        <p>You may use Fleetfolio for your personal, non-commercial use. You agree not to:</p>
+        <ul>
+            <li>Reverse engineer, decompile, or disassemble the app</li>
+            <li>Modify, adapt, or create derivative works based on the app</li>
+            <li>Distribute, license, or sell the app to third parties</li>
+            <li>Use the app for any unlawful purpose</li>
+        </ul>
+
+        <h2>User Data</h2>
+        <p>You are solely responsible for the data you enter into Fleetfolio. All data is stored locally on your device. We do not have access to, and cannot recover, your data. We recommend backing up your device regularly using iCloud or other backup methods.</p>
+
+        <h2>Intellectual Property</h2>
+        <p>Fleetfolio, including its design, features, code, and branding, is the intellectual property of the developer. All rights are reserved. Nothing in these terms grants you any rights to use the Fleetfolio name, logo, or branding.</p>
+
+        <h2>Disclaimer of Warranties</h2>
+        <p>Fleetfolio is provided "as is" and "as available" without warranties of any kind, either express or implied. We do not warrant that the app will be uninterrupted, error-free, or free of harmful components.</p>
+        <p>The app is intended for personal record-keeping purposes only. It should not be relied upon as the sole source for vehicle maintenance scheduling, safety decisions, or financial records.</p>
+
+        <h2>Limitation of Liability</h2>
+        <p>To the fullest extent permitted by applicable law, the developer shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including but not limited to loss of data, arising out of or related to your use of the app.</p>
+
+        <h2>App Store Terms</h2>
+        <p>Your use of Fleetfolio is also subject to the Apple Media Services Terms and Conditions. In the event of any conflict between these terms and the Apple terms, the Apple terms shall prevail with respect to your use of the app obtained through the App Store.</p>
+
+        <h2>Changes to These Terms</h2>
+        <p>We reserve the right to modify these terms at any time. Continued use of the app after changes constitutes acceptance of the updated terms. We encourage you to review these terms periodically.</p>
+
+        <h2>Termination</h2>
+        <p>We may terminate or suspend your access to the app at any time, without prior notice, for conduct that we believe violates these terms or is harmful to other users or the app.</p>
+
+        <h2>Contact Us</h2>
+        <p>If you have any questions about these Terms of Service, please contact us at <a href="mailto:contact@example.com">contact@example.com</a>.</p>
+    </div>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-left">&copy; 2025 Fleetfolio. All rights reserved.</div>
+            <ul class="footer-links">
+                <li><a href="privacy.html">Privacy Policy</a></li>
+                <li><a href="terms.html">Terms of Service</a></li>
+                <li><a href="mailto:contact@example.com">Contact</a></li>
+            </ul>
+        </div>
+    </footer>
+</body>
+</html>
